@@ -1,12 +1,9 @@
-import 'dart:developer';
-
 import 'package:delivery_boy/model/HistoryOrderModel.dart';
 import 'package:delivery_boy/model/detailsProduct_model.dart';
 import 'package:delivery_boy/model/order_modal.dart';
 import 'package:esc_pos_utils/esc_pos_utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:sunmi_printer_plus/column_maker.dart';
 import 'package:sunmi_printer_plus/enums.dart';
 import 'package:sunmi_printer_plus/sunmi_printer_plus.dart';
 import 'package:image/image.dart' as im;

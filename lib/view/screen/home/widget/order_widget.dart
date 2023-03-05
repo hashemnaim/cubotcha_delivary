@@ -11,9 +11,10 @@ import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../helper/method_helpar.dart';
+import '../../../custom_widget/lunchers_helper.dart';
 
 class OrderWidget extends StatelessWidget {
-  final List<Processing>? orderModel;
+  final List<OrderDetails>? orderModel;
   final int index;
   OrderWidget({this.orderModel, required this.index});
 
@@ -41,38 +42,33 @@ class OrderWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 CustomText(
-                  text: '#${orderModel![index].code.toString()}',
+                  text: '#${orderModel![index].id.toString()}',
                   fontSize: 25.sp,
                   fontWeight: FontWeight.w600,
                 ),
-                InkWell(
-                  onTap: () {
-                    launch('tel:${orderModel![index].mobile ?? ""}');
-                  },
-                  child: CustomText(
-                    text: '${orderModel![index].mobile ?? ''}',
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Icon(
-                  Icons.person,
-                  color: AppColors.primary,
-                ),
-                SizedBox(width: 8),
                 CustomText(
-                  text: '${orderModel![index].user!.name ?? ''}',
-                  fontSize: 20,
+                  text: '${orderModel![index].totalPrice.toString()} جنيه',
+                  fontSize: 25.sp,
                   fontWeight: FontWeight.w600,
                 ),
               ],
             ),
-            SizedBox(height: 8),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.start,
+            //   children: [
+            //     Icon(
+            //       Icons.person,
+            //       color: AppColors.primary,
+            //     ),
+            //     SizedBox(width: 8),
+            //     CustomText(
+            //       text: '${orderModel![index].user!.name ?? ''}',
+            //       fontSize: 20,
+            //       fontWeight: FontWeight.w600,
+            //     ),
+            //   ],
+            // ),
+            // SizedBox(height: 8),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -81,12 +77,21 @@ class OrderWidget extends StatelessWidget {
                   color: AppColors.primary,
                 ),
                 SizedBox(width: 8),
-                Expanded(
-                    child: orderModel![index].shippingAddress == null
-                        ? Container()
-                        : CustomText(
-                            text: orderModel![index].shippingAddress!.street,
-                          )),
+                orderModel![index].shippingAddress == null
+                    ? Container()
+                    : Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CustomText(
+                              text: orderModel![index].shippingAddress!.street),
+                          CustomText(
+                            text: " البناية " +
+                                orderModel![index].shippingAddress!.building! +
+                                " - الدور " +
+                                orderModel![index].shippingAddress!.apartment!,
+                          ),
+                        ],
+                      ),
               ],
             ),
             Padding(
@@ -127,19 +132,33 @@ class OrderWidget extends StatelessWidget {
               children: [
                 Container(
                   height: 50,
-                  width: 100,
+                  width: 80.w,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(24.0),
                       color: AppColors.white),
                   child: IconButton(
                       icon: Icon(Icons.phone, color: AppColors.primary),
                       onPressed: () {
-                        launch('tel:${orderModel![index].mobile ?? ""}');
+                        launch('tel:${orderModel![index].user!.mobile ?? ""}');
                       }),
                 ),
                 Container(
                   height: 50,
-                  width: 100,
+                  width: 80.w,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(24.0),
+                      color: AppColors.white),
+                  child: IconButton(
+                      icon: Icon(Icons.whatsapp, color: AppColors.primary),
+                      onPressed: () async {
+                        LuncherHelper.validationHelper.launchWhatsApp(
+                            phone: orderModel![index].user!.mobile,
+                            message: "");
+                      }),
+                ),
+                Container(
+                  height: 50,
+                  width: 80.w,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(24.0),
                       color: AppColors.white),
@@ -159,7 +178,7 @@ class OrderWidget extends StatelessWidget {
                 ),
                 Container(
                     height: 50,
-                    width: 100,
+                    width: 80.w,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(24.0),
                         color: AppColors.white),

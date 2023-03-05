@@ -1,3 +1,4 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:delivery_boy/controller/controller_auth.dart';
 import 'package:delivery_boy/controller/controller_order.dart';
 import 'package:delivery_boy/print/invoice_settings.controller.dart';
@@ -36,12 +37,8 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     Get.lazyPut(() => AppController(), fenix: false);
     Get.lazyPut(() => AuthController(), fenix: false);
-    Get.put(
-      InvoiceSettingsController(),
-    );
-    Get.put(
-      OrderController(),
-    );
+    Get.put(InvoiceSettingsController());
+    Get.put(OrderController());
 
     Get.lazyPut(() => CategorieController(), fenix: false);
     Get.lazyPut(() => ProfileController(), fenix: false);
@@ -64,9 +61,8 @@ class _MyAppState extends State<MyApp> {
         return GetMaterialApp(
             debugShowCheckedModeBanner: false,
             locale: Locale("ar"),
-            // theme: ThemeData(
-            //     scaffoldBackgroundColor: Colors.white,
-            //     colorScheme: ColorScheme.dark()),
+            builder: BotToastInit(),
+            navigatorObservers: [BotToastNavigatorObserver()],
             home: Splash());
       },
     );

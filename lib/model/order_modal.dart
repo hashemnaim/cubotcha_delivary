@@ -2,7 +2,7 @@ class OrderModel {
   int? code;
   bool? status;
   String? message;
-  OrderId? orderId;
+  OrderAll? orderId;
 
   OrderModel({this.code, this.status, this.message, this.orderId});
 
@@ -11,7 +11,7 @@ class OrderModel {
     status = json['status'];
     message = json['message'];
     orderId = json['order_id'] != null
-        ? new OrderId.fromJson(json['order_id'])
+        ? new OrderAll.fromJson(json['order_id'])
         : null;
   }
 
@@ -27,16 +27,14 @@ class OrderModel {
   }
 }
 
-class OrderId {
-  List<Processing>? processing;
-
-  OrderId({this.processing});
-
-  OrderId.fromJson(Map<String, dynamic> json) {
+class OrderAll {
+  List<OrderDetails>? processing;
+  // OrderDetails({this.processing});
+  OrderAll.fromJson(Map<String, dynamic> json) {
     if (json['processing'] != null) {
-      processing = <Processing>[];
+      processing = <OrderDetails>[];
       json['processing'].forEach((v) {
-        processing!.add(new Processing.fromJson(v));
+        processing!.add(new OrderDetails.fromJson(v));
       });
     }
   }
@@ -50,7 +48,7 @@ class OrderId {
   }
 }
 
-class Processing {
+class OrderDetails {
   int? id;
   String? createdAt;
   String? updatedAt;
@@ -62,10 +60,10 @@ class Processing {
   String? tax;
   String? time;
   String? day;
-
   String? mobile;
   String? discount;
   String? cartonId;
+  String? discount_price;
   String? driverId;
   String? code;
   String? cash;
@@ -74,7 +72,7 @@ class Processing {
   User? user;
   ShippingAddress? shippingAddress;
 
-  Processing(
+  OrderDetails(
       {this.id,
       this.createdAt,
       this.updatedAt,
@@ -83,6 +81,7 @@ class Processing {
       this.status,
       this.statusCode,
       this.deliveryCost,
+      this.discount_price,
       this.tax,
       this.time,
       this.day,
@@ -97,19 +96,19 @@ class Processing {
       this.user,
       this.shippingAddress});
 
-  Processing.fromJson(Map<String, dynamic> json) {
+  OrderDetails.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     userId = json['user_id'];
-    totalPrice = json['total_price'];
+    totalPrice = json['total_price'].toString();
     status = json['status'];
     statusCode = json['status_code'];
     deliveryCost = json['delivery_cost'];
+    discount_price = json['discount_price'].toString();
     tax = json['tax'];
     time = json['time'];
     day = json['day'];
-
     mobile = json['mobile'];
     discount = json['discount'];
     cartonId = json['carton_id'];
@@ -120,7 +119,7 @@ class Processing {
     sumPoints = json['sum_points'];
     user = json['user'] != null ? new User.fromJson(json['user']) : null;
     shippingAddress = json['shipping_address'] != null
-        ? new ShippingAddress.fromJson(json['shipping_address'])
+        ? ShippingAddress.fromJson(json['shipping_address'])
         : null;
   }
 
@@ -160,9 +159,7 @@ class User {
   int? id;
   String? name;
   String? mobile;
-
   String? type;
-
   String? createdAt;
   String? updatedAt;
   String? membership;
@@ -214,9 +211,7 @@ class User {
     data['id'] = this.id;
     data['name'] = this.name;
     data['mobile'] = this.mobile;
-
     data['type'] = this.type;
-
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
     data['membership'] = this.membership;
@@ -242,6 +237,8 @@ class ShippingAddress {
   String? userId;
   String? cityId;
   String? areaId;
+  String? apartment;
+  String? building;
   String? isDefault;
 
   ShippingAddress(
@@ -250,6 +247,8 @@ class ShippingAddress {
       this.street,
       this.lat,
       this.lng,
+      this.apartment,
+      this.building,
       this.createdAt,
       this.updatedAt,
       this.userId,
@@ -268,6 +267,8 @@ class ShippingAddress {
     userId = json['user_id'];
     cityId = json['city_id'];
     areaId = json['area_id'];
+    apartment = json['apartment'];
+    building = json['building'];
     isDefault = json['is_default'];
   }
 

@@ -1,5 +1,4 @@
-import 'dart:developer';
-
+import 'package:bot_toast/bot_toast.dart';
 import 'package:delivery_boy/controller/controller_auth.dart';
 import 'package:delivery_boy/values/export.dart';
 import 'package:delivery_boy/view/custom_widget/custom_dialoug.dart';
@@ -32,6 +31,7 @@ class ServerAuth {
     String? confirmationPassword,
   }) async {
     initApi();
+    BotToast.showLoading();
 
     try {
       Response response = await dio!.post(url + 'signup', data: {
@@ -44,7 +44,7 @@ class ServerAuth {
           return status! < 500;
         },
       ));
-      appController.pr.hide();
+      BotToast.closeAllLoading();
       if (response.data['status'] == 200) {
         authController.password = password;
         await SHelper.sHelper.setToken(response.data["data"]['token']);
@@ -57,7 +57,7 @@ class ServerAuth {
         );
       }
     } catch (e) {
-      appController.pr.hide();
+      BotToast.closeAllLoading();
       getx.Get.snackbar(
         "Register Faild",
         "",
@@ -72,10 +72,8 @@ class ServerAuth {
     String? fcmToken = await firebaseMessaging.getToken();
     await SHelper.sHelper.setFcmToken(fcmToken!);
     try {
-      appController.pr.show(message: '');
-      log(mobile.toString());
-      log(password.toString());
-      log(fcmToken.toString());
+      BotToast.showLoading();
+
       Response response = await dio!.post(
         url + 'user/login',
         data: {
@@ -84,8 +82,7 @@ class ServerAuth {
           "fcm_token": fcmToken,
         },
       );
-      log(response.data.toString());
-      appController.pr.hide();
+      BotToast.closeAllLoading();
       if (response.data['code'] == 200) {
         appController.token = response.data['accessToken'];
         await SHelper.sHelper.setToken(response.data['accessToken']);
@@ -93,11 +90,8 @@ class ServerAuth {
         await SHelper.sHelper.addNew('mobile', response.data["user"]['mobile']);
         await SHelper.sHelper
             .addNew('address', response.data["user"]['address']);
-        getx.Get.snackbar(
-          "",
-          response.data['message'],
-          duration: Duration(seconds: 2),
-        );
+        BotToast.closeAllLoading();
+
         await appController.getApi();
       } else {
         getx.Get.snackbar(
@@ -107,7 +101,7 @@ class ServerAuth {
         );
       }
     } catch (e) {
-      appController.pr.hide();
+      BotToast.closeAllLoading();
       getx.Get.snackbar(
         "Login Faild",
         "Error",

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:delivery_boy/server/server_order.dart';
 
 import 'package:delivery_boy/values/export.dart';
@@ -21,10 +19,9 @@ class AppController extends GetxController {
 
   getApi() async {
     if (SHelper.sHelper.getToken() != null) {
-      String s = SHelper.sHelper.getFcmToken()!;
-      log(s);
+      SHelper.sHelper.getFcmToken()!;
       await ServerOrder.instance.getOrders();
-      await ServerOrder.instance.getOrderFinish();
+      ServerOrder.instance.getOrderFinish(DateTime.now().toString());
       Get.offAll(() => MainScreen());
     } else {
       Get.offAll(() => LoginScreen());

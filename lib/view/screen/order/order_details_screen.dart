@@ -1,9 +1,7 @@
 import 'dart:math';
 import 'package:delivery_boy/controller/controller_order.dart';
-
 import 'package:delivery_boy/values/dimensions.dart';
 import 'package:delivery_boy/values/export.dart';
-
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,6 +13,7 @@ import '../../../server/server_order.dart';
 import '../../../values/styles.dart';
 import '../../custom_widget/custom_image_Network.dart';
 import '../../main_screen.dart';
+import '../home/widget/order_widget.dart';
 import 'widget/custom_divider.dart';
 import 'widget/delivery_dialog.dart';
 import 'widget/permission_dialog.dart';
@@ -38,7 +37,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   void initState() {
     super.initState();
     // orderController.begin.value = false;
-    SunmiPrinter.bindingPrinter();
+    // SunmiPrinter.bindingPrinter();
   }
 
   @override
@@ -56,16 +55,16 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                   ServerOrder.instance.getOrders();
                 },
               ),
-              IconButton(
-                icon: Icon(Icons.print,
-                    color: Theme.of(context).textTheme.bodyText1!.color),
-                onPressed: () async {
-                  orderController
-                      .printSunmi(orderController.detailsProdact.value.orders!);
-                  // orderController.invoiceBuilder(
-                  //     orderController.detailsProdact.value.orders!);
-                },
-              ),
+              // IconButton(
+              //   icon: Icon(Icons.print,
+              //       color: Theme.of(context).textTheme.bodyText1!.color),
+              //   onPressed: () async {
+              //     orderController
+              //         .printSunmi(orderController.detailsProdact.value.orders!);
+              //     // orderController.invoiceBuilder(
+              //     //     orderController.detailsProdact.value.orders!);
+              //   },
+              // ),
             ],
             leading: IconButton(
               icon: Icon(
@@ -93,7 +92,6 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
               children: [
                 Expanded(
                   child: ListView(
-                    physics: BouncingScrollPhysics(),
                     padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
                     children: [
                       CustomText(
@@ -102,6 +100,12 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
                       ),
+                      //   CustomText(
+                      //   text:
+                      //       ' # ${orderController.detailsProdact.value.orders!.code}',
+                      //   fontSize: 22,
+                      //   fontWeight: FontWeight.bold,
+                      // ),
                       Row(
                         children: [
                           Row(children: [
@@ -193,10 +197,32 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                               ]),
                               Row(
                                 children: [
-                                  Icon(
-                                    Icons.location_on,
-                                    color: AppColors.primary,
-                                    size: 30,
+                                  IconButton(
+                                    icon: Icon(
+                                      Icons.location_on,
+                                      color: AppColors.primary,
+                                      size: 30,
+                                    ),
+                                    onPressed: () async {
+                                      var position =
+                                          await Geolocator.getCurrentPosition();
+
+                                      MapUtils.openMap(
+                                          double.parse(orderController
+                                              .detailsProdact
+                                              .value
+                                              .orders!
+                                              .address!
+                                              .lat!),
+                                          double.parse(orderController
+                                              .detailsProdact
+                                              .value
+                                              .orders!
+                                              .address!
+                                              .lng!),
+                                          position.latitude,
+                                          position.longitude);
+                                    },
                                   ),
                                   SizedBox(width: 5),
                                   Expanded(
@@ -304,7 +330,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                       else
                         ListView.builder(
                           shrinkWrap: true,
-                          padding: EdgeInsets.all(0),
+                          padding: EdgeInsets.zero,
                           physics: NeverScrollableScrollPhysics(),
                           primary: false,
                           itemCount: orderController
@@ -312,9 +338,19 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                           itemBuilder: (context, index2) {
                             return ListTile(
                               trailing: Text(
-                                  orderController.detailsProdact.value.orders!
-                                          .products![index2].price
-                                          .toString() +
+                                  (double.parse(orderController
+                                                  .detailsProdact
+                                                  .value
+                                                  .orders!
+                                                  .products![index2]
+                                                  .price!) *
+                                              double.parse(orderController
+                                                  .detailsProdact
+                                                  .value
+                                                  .orders!
+                                                  .products![index2]
+                                                  .quantity!))
+                                          .toStringAsFixed(1) +
                                       " جنيه",
                                   style: rubikMedium.copyWith(fontSize: 14.sp)),
                               leading: SizedBox(
@@ -342,7 +378,8 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                                 ),
                               ),
                               title: Text(
-                                " ${orderController.detailsProdact.value.orders!.products![index2].quantity} X",
+                                orderController.detailsProdact.value.orders!
+                                    .products![index2].quantity!,
                                 style: rubikMedium.copyWith(
                                   fontSize: Dimensions.FONT_SIZE_EXTRA_LARGE,
                                 ),
@@ -350,6 +387,64 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                             );
                           },
                         ),
+                      if (orderController
+                              .detailsProdact.value.orders!.cartons!.length ==
+                          0)
+                        Container()
+                      else
+                        ListView.builder(
+                          shrinkWrap: true,
+                          padding: EdgeInsets.all(0),
+                          physics: NeverScrollableScrollPhysics(),
+                          primary: false,
+                          itemCount: orderController
+                              .detailsProdact.value.orders!.cartons!.length,
+                          itemBuilder: (context, index2) {
+                            return ListTile(
+                              trailing: Text(
+                                  orderController.detailsProdact.value.orders!
+                                          .cartons![index2].cartonPrice
+                                          .toString() +
+                                      " جنيه",
+                                  style: rubikMedium.copyWith(fontSize: 14.sp)),
+                              leading: SizedBox(
+                                width: 140.w,
+                                child: Row(
+                                  children: [
+                                    CustomNetworkImage(
+                                      imgUrl +
+                                          orderController.detailsProdact.value
+                                              .orders!.cartons![index2].image!,
+                                      borderRadius: 0,
+                                      width: 40.w,
+                                      fit: BoxFit.contain,
+                                    ),
+                                    SizedBox(width: 4.w),
+                                    Container(
+                                      width: 90.w,
+                                      child: Text(
+                                          orderController
+                                              .detailsProdact
+                                              .value
+                                              .orders!
+                                              .cartons![index2]
+                                              .cartonName!,
+                                          style: rubikMedium.copyWith(
+                                              fontSize: 14.sp)),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              title: Text(
+                                " ${orderController.detailsProdact.value.orders!.products![index2].quantity}",
+                                style: rubikMedium.copyWith(
+                                  fontSize: Dimensions.FONT_SIZE_EXTRA_LARGE,
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+
                       SizedBox(height: 8.h),
                       CustomDivider(),
                       SizedBox(height: 8.h),
@@ -361,15 +456,38 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                                   fontSize: Dimensions.FONT_SIZE_LARGE,
                                 )),
                             Text(
-                                orderController
-                                        .detailsProdact.value.orders!.totalPrice
-                                        .toString() +
+                                (double.parse(orderController
+                                                    .detailsProdact
+                                                    .value
+                                                    .orders!
+                                                    .discount_price ??
+                                                "0") +
+                                            double.parse(orderController
+                                                    .detailsProdact
+                                                    .value
+                                                    .orders!
+                                                    .totalPrice ??
+                                                "0"))
+                                        .toStringAsFixed(2) +
                                     " جنيه",
                                 style: rubikMedium.copyWith(
                                   fontSize: Dimensions.FONT_SIZE_LARGE,
                                 )),
                           ]),
-                      SizedBox(height: 10),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            CustomText(
+                              text: 'الخصم',
+                              fontSize: Dimensions.FONT_SIZE_LARGE,
+                            ),
+                            CustomText(
+                              text:
+                                  '${orderController.detailsProdact.value.orders!.discount_price} جنيه',
+                              fontSize: Dimensions.FONT_SIZE_LARGE,
+                            ),
+                          ]),
+
                       Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -383,6 +501,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                               fontSize: Dimensions.FONT_SIZE_LARGE,
                             ),
                           ]),
+
                       Padding(
                         padding: EdgeInsets.symmetric(
                             vertical: Dimensions.PADDING_SIZE_SMALL),

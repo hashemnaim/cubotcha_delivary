@@ -47,8 +47,8 @@ class _MainScreenState extends State<MainScreen> {
               IconButton(
                 icon: Icon(Icons.refresh,
                     color: Theme.of(context).textTheme.bodyText1!.color),
-                onPressed: () {
-                  ServerOrder.instance.getOrders();
+                onPressed: () async {
+                  await ServerOrder.instance.getOrders();
                 },
               ),
             ],
@@ -59,10 +59,8 @@ class _MainScreenState extends State<MainScreen> {
               height: 60,
               width: 100,
             )),
-
         backgroundColor: Colors.transparent,
         resizeToAvoidBottomInset: false,
-        // body: Obx(() => screens[appController.indexNav.value]),
         bottomNavigationBar: BottomNavigationBar(
           selectedItemColor: AppColors.primary,
           elevation: 10,

@@ -29,6 +29,7 @@ class Orders {
   String? time;
   String? totalPrice;
   String? deliveryCost;
+  String? discount_price;
   String? tax;
   String? status;
   String? statusCode;
@@ -47,6 +48,7 @@ class Orders {
       this.tax,
       this.status,
       this.statusCode,
+      this.discount_price,
       this.products,
       this.cartons,
       this.cash,
@@ -57,10 +59,11 @@ class Orders {
     code = json['code'];
     date = json['date'];
     time = json['time'];
-    totalPrice = json['total_price'];
+    totalPrice = json['total_price'].toString();
     deliveryCost = json['delivery_cost'];
     tax = json['tax'];
     status = json['status'];
+    discount_price = json['discount_price'].toString();
     statusCode = json['status_code'];
     if (json['products'] != null) {
       products = <Products>[];
@@ -105,7 +108,7 @@ class Orders {
 }
 
 class Products {
-  int? id;
+  String? id;
   String? name;
   String? price;
   String? categoryId;
@@ -129,15 +132,17 @@ class Products {
       this.image});
 
   Products.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+    id = json['id'].toString();
     name = json['name'];
-    price = double.parse(json['price']).toStringAsFixed(1);
+    price = double.parse(json['price'] == "" ? "0" : json['price'])
+        .toStringAsFixed(1);
     categoryId = json['category_id'];
     unit = json['unit'];
     maxQty = json['max_qty'];
     points = json['points'];
     stock = json['stock'];
-    quantity = double.parse(json['quantity']).toStringAsFixed(1);
+    quantity = double.parse(json['quantity'] == "" ? "0" : json['quantity'])
+        .toStringAsFixed(1);
     image = json['image'];
   }
 
@@ -184,7 +189,7 @@ class Cartons {
     cartonName = json['carton_name'];
     cartonPrice = double.parse(json['carton_price']).toStringAsFixed(1);
     quantity = double.parse(json['quantity']).toStringAsFixed(1);
-    ;
+
     totalPrice = json['total_price'];
     image = json['image'];
   }

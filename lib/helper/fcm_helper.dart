@@ -37,9 +37,9 @@ class FcmHelper {
 
       FirebaseMessaging.onMessage.listen(_fcmForegroundHandler);
       FirebaseMessaging.onBackgroundMessage(_fcmBackgroundHandler);
-      FirebaseMessaging.onBackgroundMessage((RemoteMessage message) async {
-        return print("onBackgroundMessage");
-      });
+      // FirebaseMessaging.onBackgroundMessage((RemoteMessage message) async {
+      //   return print("onBackgroundMessage");
+      // });
 
       listenToActionButtons();
     } catch (error) {
@@ -82,8 +82,6 @@ class FcmHelper {
       if (token != null) {
         SHelper.sHelper.setFcmToken(token);
         _sendFcmTokenToServer();
-
-        log(token.toString());
       } else {
         // retry generating token
         await Future.delayed(const Duration(seconds: 5));
@@ -114,7 +112,7 @@ class FcmHelper {
       title: message.notification!.title ?? 'Tittle',
       body: message.notification!.body ?? 'Body',
     );
-    if (message.notification!.body!.contains("التوصيل")) {
+    if (message.notification!.title!.contains("رقم الطلب")) {
       return ServerOrder.instance.getOrders();
     }
 

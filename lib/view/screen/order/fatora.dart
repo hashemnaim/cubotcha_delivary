@@ -13,21 +13,6 @@ class FatoraScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // DateTime timeOrder = DateTime.parse(order.orderTime);
-    // DateTime time = DateTime.parse(DateFormat('kk:mm').format(DateTime.now()));
-    // DateTime date =DateTime.parse(DateFormat('EEE, M/d/y').format(DateTime.now()));
-
-    // Duration dur = timeOrder.difference(DateTime.now());
-    // if (dur.toString().substring(1) == "0") {
-    //   unitTime = "muints";
-    //   timeOrderRang = dur.toString().substring(2, 4);
-    //   print(timeOrderRang);
-    // } else {
-    //   unitTime = "hours";
-    //   timeOrderRang = dur.toString().substring(0, 4);
-    //   print(timeOrderRang);
-    // }
-
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Directionality(
