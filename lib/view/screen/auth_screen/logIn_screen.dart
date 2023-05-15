@@ -42,161 +42,79 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Expanded(
-            // flex: 2,
-            child: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image:
-                        ExactAssetImage("assets/images/loginBackground.png")),
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 3,
-            child: Container(
-              color: Colors.white,
-              child: Form(
-                  key: formKey,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: <Widget>[
-                          FadeInRight(
-                              duration: Duration(milliseconds: 2000),
-                              child: Container(
-                                  height: 150,
-                                  width: 250,
-                                  child: Image.asset(
-                                    "assets/images/van.gif",
-                                    fit: BoxFit.fill,
-                                  ))),
-                          // Container(
-                          //     // height: MediaQuery.of(context).size.height * 0.1,
-                          //     alignment: Alignment.center,
-                          //     child: Text(
-                          //       "تسجيل الدخول",
-                          //       style: TextStyle(
-                          //         color: Color(0xff658199),
-                          //         fontFamily: 'Cairo',
-                          //         fontSize: 20.0,
-                          //       ),
-                          //     )),
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.02,
-                          ),
-                          CustomTextFormField(
-                              hintText: 'رقم الموبايل',
-                              textEditingController: number,
-                              textInputType: TextInputType.phone,
-                              validator: setNumberValidator,
-                              // fillColor: AppColors.gray.withOpacity(0.9),
-                              prefixIcon: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Icon(Icons.person))),
-
-                          SizedBox(
-                            height: 20.h,
-                          ),
-                          CustomTextFormField(
-                            hintText: 'كلمة المرور',
-                            password: true,
-                            textEditingController: password,
-                            validator: setPasswordValidator,
+          Container(
+            child: Form(
+                key: formKey,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: <Widget>[
+                        FadeInRight(
+                            duration: Duration(milliseconds: 2000),
+                            child: Container(
+                                height: 150,
+                                width: 250,
+                                child: Image.asset(
+                                  "assets/images/van.gif",
+                                  fit: BoxFit.fill,
+                                ))),
+                        Container(
+                            height: 10.h,
+                            alignment: Alignment.center,
+                            child: Text(
+                              "تسجيل الدخول",
+                              style: TextStyle(
+                                color: Color(0xff658199),
+                                fontFamily: 'Cairo',
+                                fontSize: 20.0,
+                              ),
+                            )),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.02,
+                        ),
+                        CustomTextFormField(
+                            hintText: 'رقم الموبايل',
+                            textEditingController: number,
+                            textInputType: TextInputType.phone,
+                            validator: setNumberValidator,
                             prefixIcon: Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: Icon(Icons.lock)),
-                          ),
-
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.02,
-                          ),
-                          CustomButton(
-                            height: 50,
-                            width: 180,
-                            onTap: () => saveForm(),
-                            text: "تسجيل الدخول",
-                            colorText: AppColors.white,
-                          ),
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.01,
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Get.to(() => ForgetScreen());
-                            },
-                            child: CustomText(
-                              text: "هل نسيت كلمة المرور؟",
-                              color: Color(0xff658199),
-                              fontSize: 18.0,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10.h,
-                          ),
-                          // GestureDetector(
-                          //   onTap: () {
-                          //     providerModalHand.changeModelhan(false);
-
-                          //     Navigator.push(
-                          //         context,
-                          //         MaterialPageRoute(
-                          //             builder: (context) => RegisterScreen()));
-                          //   },
-                          //   child: Container(
-                          //     height:
-                          //         MediaQuery.of(context).size.height * 0.035,
-                          //     //  width: 190,
-                          //     child: Center(
-                          //       child: Row(
-                          //         mainAxisAlignment: MainAxisAlignment.center,
-                          //         children: [
-                          //           Text(
-                          //             "  أنشاء حساب  ",
-                          //             style: TextStyle(
-                          //               color: Color(0xff658199),
-                          //               fontFamily: 'Cairo',
-                          //               fontSize: 16.0,
-                          //             ),
-                          //           ),
-                          //           Text(
-                          //             " لا يوجد لديك حساب ؟",
-                          //             style: TextStyle(
-                          //               color: Colors.grey,
-                          //               fontFamily: 'Cairo',
-                          //               fontSize: 16.0,
-                          //             ),
-                          //           ),
-                          //         ],
-                          //       ),
-                          //     ),
-                          //   ),
-                          // ),
-                        ],
-                      ),
+                                child: Icon(Icons.person))),
+                        SizedBox(
+                          height: 20.h,
+                        ),
+                        CustomTextFormField(
+                          hintText: 'كلمة المرور',
+                          password: true,
+                          textEditingController: password,
+                          validator: setPasswordValidator,
+                          prefixIcon: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Icon(Icons.lock)),
+                        ),
+                        SizedBox(
+                          height: 50.h,
+                        ),
+                        CustomButton(
+                          height: 55.h,
+                          width: 200.w,
+                          onTap: () => saveForm(),
+                          text: "تسجيل الدخول",
+                          colorText: AppColors.white,
+                        ),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                      ],
                     ),
-                  )),
-            ),
+                  ),
+                )),
           ),
-          // Expanded(
-          //   // flex: 1,
-          //   child: Transform.rotate(
-          //     origin: Offset(0, 0),
-          //     angle: 3.142,
-          //     child: Container(
-          //       decoration: BoxDecoration(
-          //         image: DecorationImage(
-          //             fit: BoxFit.cover,
-          //             image:
-          //                 ExactAssetImage("assets/images/loginBackground.png")),
-          //       ),
-          //     ),
-          //   ),
-          // ),
         ],
       ),
     );

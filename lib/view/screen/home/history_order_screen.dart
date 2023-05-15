@@ -18,7 +18,13 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
       new GlobalKey<RefreshIndicatorState>();
 
   int indexDate = 0;
-
+@override
+  void initState() {
+  indexDate = 0;
+                       ServerOrder.instance
+                          .getOrderFinish(DateTime.now().toString());
+                         super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(body: Obx(() {

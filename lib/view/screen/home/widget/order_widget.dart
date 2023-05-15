@@ -23,7 +23,7 @@ class OrderWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(2.0),
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+        padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
         margin: EdgeInsets.only(bottom: Dimensions.PADDING_SIZE_SMALL),
         decoration: BoxDecoration(
             boxShadow: [
@@ -42,41 +42,20 @@ class OrderWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 CustomText(
-                  text: '#${orderModel![index].id.toString()}',
-                  fontSize: 25.sp,
-                  fontWeight: FontWeight.w600,
-                ),
+                    text: '#${orderModel![index].id.toString()}',
+                    fontSize: 25.sp,
+                    fontWeight: FontWeight.w600),
                 CustomText(
-                  text: '${orderModel![index].totalPrice.toString()} جنيه',
-                  fontSize: 25.sp,
-                  fontWeight: FontWeight.w600,
-                ),
+                    text: '${orderModel![index].totalPrice.toString()} جنيه',
+                    fontSize: 25.sp,
+                    fontWeight: FontWeight.w600),
               ],
             ),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.start,
-            //   children: [
-            //     Icon(
-            //       Icons.person,
-            //       color: AppColors.primary,
-            //     ),
-            //     SizedBox(width: 8),
-            //     CustomText(
-            //       text: '${orderModel![index].user!.name ?? ''}',
-            //       fontSize: 20,
-            //       fontWeight: FontWeight.w600,
-            //     ),
-            //   ],
-            // ),
-            // SizedBox(height: 8),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Icon(
-                  Icons.location_on,
-                  color: AppColors.primary,
-                ),
-                SizedBox(width: 8),
+                Icon(Icons.location_on, color: AppColors.primary),
+                SizedBox(width: 8.w),
                 orderModel![index].shippingAddress == null
                     ? Container()
                     : Column(
@@ -85,11 +64,14 @@ class OrderWidget extends StatelessWidget {
                           CustomText(
                               text: orderModel![index].shippingAddress!.street),
                           CustomText(
-                            text: " البناية " +
-                                orderModel![index].shippingAddress!.building! +
-                                " - الدور " +
-                                orderModel![index].shippingAddress!.apartment!,
-                          ),
+                              text: " البناية " +
+                                  orderModel![index]
+                                      .shippingAddress!
+                                      .building! +
+                                  " - الدور " +
+                                  orderModel![index]
+                                      .shippingAddress!
+                                      .apartment!),
                         ],
                       ),
               ],
@@ -100,8 +82,8 @@ class OrderWidget extends StatelessWidget {
                 children: [
                   Row(children: [
                     Container(
-                        height: 10,
-                        width: 10,
+                        height: 10.h,
+                        width: 10.w,
                         decoration: BoxDecoration(
                             shape: BoxShape.circle, color: AppColors.primary)),
                     SizedBox(width: Dimensions.PADDING_SIZE_EXTRA_SMALL),
@@ -113,8 +95,8 @@ class OrderWidget extends StatelessWidget {
                   Spacer(),
                   Row(children: [
                     Container(
-                        height: 10,
-                        width: 10,
+                        height: 10.h,
+                        width: 10.w,
                         decoration: BoxDecoration(
                             shape: BoxShape.circle, color: AppColors.primary)),
                     SizedBox(width: Dimensions.PADDING_SIZE_EXTRA_SMALL),
@@ -123,7 +105,7 @@ class OrderWidget extends StatelessWidget {
                       fontSize: Dimensions.FONT_SIZE_LARGE,
                     ),
                   ]),
-                  SizedBox(width: Dimensions.PADDING_SIZE_LARGE),
+                  SizedBox(width: Dimensions.PADDING_SIZE_LARGE)
                 ],
               ),
             ),
@@ -131,7 +113,7 @@ class OrderWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  height: 50,
+                  height: 50.h,
                   width: 80.w,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(24.0),
@@ -143,13 +125,14 @@ class OrderWidget extends StatelessWidget {
                       }),
                 ),
                 Container(
-                  height: 50,
+                  height: 50.h,
                   width: 80.w,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(24.0),
                       color: AppColors.white),
                   child: IconButton(
-                      icon: Icon(Icons.whatsapp, color: AppColors.primary),
+                      icon:
+                          Icon(Icons.wechat_rounded, color: AppColors.primary),
                       onPressed: () async {
                         LuncherHelper.validationHelper.launchWhatsApp(
                             phone: orderModel![index].user!.mobile,
@@ -157,7 +140,7 @@ class OrderWidget extends StatelessWidget {
                       }),
                 ),
                 Container(
-                  height: 50,
+                  height: 50.h,
                   width: 80.w,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(24.0),

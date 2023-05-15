@@ -198,11 +198,8 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                               Row(
                                 children: [
                                   IconButton(
-                                    icon: Icon(
-                                      Icons.location_on,
-                                      color: AppColors.primary,
-                                      size: 30,
-                                    ),
+                                    icon: Icon(Icons.location_on,
+                                        color: AppColors.primary, size: 30.sp),
                                     onPressed: () async {
                                       var position =
                                           await Geolocator.getCurrentPosition();
@@ -224,7 +221,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                                           position.longitude);
                                     },
                                   ),
-                                  SizedBox(width: 5),
+                                  SizedBox(width: 5.w),
                                   Expanded(
                                       child: Column(
                                     crossAxisAlignment:
@@ -492,14 +489,12 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             CustomText(
-                              text: 'رسوم التوصيل',
-                              fontSize: Dimensions.FONT_SIZE_LARGE,
-                            ),
+                                text: 'رسوم التوصيل',
+                                fontSize: Dimensions.FONT_SIZE_LARGE),
                             CustomText(
-                              text:
-                                  '${orderController.detailsProdact.value.orders!.deliveryCost.toString()} جنيه',
-                              fontSize: Dimensions.FONT_SIZE_LARGE,
-                            ),
+                                text:
+                                    '${orderController.detailsProdact.value.orders!.deliveryCost.toString()} جنيه',
+                                fontSize: Dimensions.FONT_SIZE_LARGE),
                           ]),
 
                       Padding(

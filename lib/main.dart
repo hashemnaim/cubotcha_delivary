@@ -54,9 +54,9 @@ class _MyAppState extends State<MyApp> {
         precacheImage(AssetImage('assets/images/im1.png'), context);
         precacheImage(AssetImage('assets/images/im2.png'), context);
         precacheImage(AssetImage('assets/images/im3.png'), context);
-        precacheImage(AssetImage('assets/images/loginBackground.png'), context);
-        precacheImage(
-            AssetImage('assets/images/login2Background.png'), context);
+        // precacheImage(AssetImage('assets/images/loginBackground.png'), context);
+        // precacheImage(
+        //     AssetImage('assets/images/login2Background.png'), context);
 
         return GetMaterialApp(
             debugShowCheckedModeBanner: false,
