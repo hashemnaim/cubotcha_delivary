@@ -14,7 +14,7 @@ class AppController extends GetxController {
 
   // var pr = ProgressDialogUtils.createProgressDialog(Get.context);
   SimpleFontelicoProgressDialog pr = SimpleFontelicoProgressDialog(
-      context: Get.context, barrierDimisable: false);
+      context: Get.context!, barrierDimisable: false);
   ProfileController profileController = Get.find();
 
   getApi() async {

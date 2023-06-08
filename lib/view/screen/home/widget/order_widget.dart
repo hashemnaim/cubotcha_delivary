@@ -49,6 +49,10 @@ class OrderWidget extends StatelessWidget {
                     text: '${orderModel![index].totalPrice.toString()} جنيه',
                     fontSize: 25.sp,
                     fontWeight: FontWeight.w600),
+                CustomText(
+                    text: orderModel![index].user!.name!,
+                    fontSize: 25.sp,
+                    fontWeight: FontWeight.w600),
               ],
             ),
             Row(
@@ -62,7 +66,9 @@ class OrderWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           CustomText(
-                              text: orderModel![index].shippingAddress!.street),
+                              text: orderModel![index].shippingAddress!.city! +
+                                  " - " +
+                                  orderModel![index].shippingAddress!.area!),
                           CustomText(
                               text: " البناية " +
                                   orderModel![index]
@@ -72,6 +78,8 @@ class OrderWidget extends StatelessWidget {
                                   orderModel![index]
                                       .shippingAddress!
                                       .apartment!),
+                          CustomText(
+                              text: orderModel![index].shippingAddress!.street),
                         ],
                       ),
               ],

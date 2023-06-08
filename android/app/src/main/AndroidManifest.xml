@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.VIBRATE" />
 
    <application
-        android:label="From To"
+        android:label="كابوتشا توصيل"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
           <meta-data android:name="com.google.android.geo.API_KEY"

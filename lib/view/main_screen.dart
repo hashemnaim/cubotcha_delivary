@@ -2,9 +2,9 @@ import 'package:delivery_boy/controller/controller_order.dart';
 import 'package:delivery_boy/values/export.dart';
 
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../server/server_order.dart';
+import '../values/styles.dart';
 import 'screen/home/new_order_screen.dart';
 import 'screen/home/history_order_screen.dart';
 import 'screen/profile/profile_screen.dart';
@@ -72,10 +72,10 @@ class _MainScreenState extends State<MainScreen> {
           iconSize: 25,
           type: BottomNavigationBarType.fixed,
           enableFeedback: true,
-          selectedLabelStyle: GoogleFonts.cairo(
+          selectedLabelStyle: rubikBold.copyWith(
             fontWeight: FontWeight.w600,
           ),
-          unselectedLabelStyle: GoogleFonts.cairo(
+          unselectedLabelStyle: rubikBold.copyWith(
             fontWeight: FontWeight.w600,
           ),
           items: [

@@ -1,6 +1,7 @@
 import 'package:delivery_boy/values/export.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
+
+import '../../values/styles.dart';
 
 class CustomTextFormField extends StatefulWidget {
   final String? hintText;
@@ -104,9 +105,10 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                     },
                   ),
                 ),
-          labelStyle: GoogleFonts.cairo(fontSize: 12, color: Color(0xff658199)),
+          labelStyle:
+              rubikBold.copyWith(fontSize: 12, color: Color(0xff658199)),
           hintText: widget.hintText,
-          hintStyle: GoogleFonts.cairo(
+          hintStyle: rubikBold.copyWith(
             color: Colors.grey[500],
             fontSize: 14.sp,
             fontWeight: FontWeight.w500,

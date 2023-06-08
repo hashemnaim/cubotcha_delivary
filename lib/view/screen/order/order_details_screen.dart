@@ -4,8 +4,7 @@ import 'package:delivery_boy/values/dimensions.dart';
 import 'package:delivery_boy/values/export.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:sunmi_printer_plus/sunmi_printer_plus.dart';
+
 import 'package:url_launcher/url_launcher.dart';
 import '../../../helper/method_helpar.dart';
 import '../../../model/order_modal.dart';
@@ -100,54 +99,48 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
                       ),
-                      //   CustomText(
-                      //   text:
-                      //       ' # ${orderController.detailsProdact.value.orders!.code}',
-                      //   fontSize: 22,
-                      //   fontWeight: FontWeight.bold,
-                      // ),
-                      Row(
-                        children: [
-                          Row(children: [
-                            Container(
-                                height: 10,
-                                width: 10,
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: AppColors.primary)),
-                            SizedBox(
-                                width: Dimensions.PADDING_SIZE_EXTRA_SMALL),
-                            CustomText(
-                                text:
-                                    'تاريخ : ${orderController.detailsProdact.value.orders!.date}',
-                                fontSize: Dimensions.FONT_SIZE_LARGE,
-                                color: Theme.of(context)
-                                    .textTheme
-                                    .bodyText1!
-                                    .color),
-                          ]),
-                          Spacer(),
-                          Row(children: [
-                            Container(
-                                height: 10,
-                                width: 10,
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: AppColors.primary)),
-                            SizedBox(
-                                width: Dimensions.PADDING_SIZE_EXTRA_SMALL),
-                            CustomText(
-                                text:
-                                    'الفترة : ${getPeriod(orderController.detailsProdact.value.orders!.time!)}',
-                                fontSize: Dimensions.FONT_SIZE_LARGE,
-                                color: Theme.of(context)
-                                    .textTheme
-                                    .bodyText1!
-                                    .color),
-                          ]),
-                          SizedBox(width: 4.w),
-                        ],
-                      ),
+                      orderController.detailsProdact.value.orders!.notes == null
+                          ? Container()
+                          : CustomText(
+                              text:
+                                  '${orderController.detailsProdact.value.orders!.notes ?? ""}',
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                            ),
+                      Row(children: [
+                        Row(children: [
+                          Container(
+                              height: 10.h,
+                              width: 10.w,
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: AppColors.primary)),
+                          SizedBox(width: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                          CustomText(
+                              text:
+                                  'تاريخ : ${orderController.detailsProdact.value.orders!.date}',
+                              fontSize: Dimensions.FONT_SIZE_LARGE,
+                              color:
+                                  Theme.of(context).textTheme.bodyText1!.color),
+                        ]),
+                        Spacer(),
+                        Row(children: [
+                          Container(
+                              height: 10.h,
+                              width: 10.w,
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: AppColors.primary)),
+                          SizedBox(width: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                          CustomText(
+                              text:
+                                  'الفترة : ${getPeriod(orderController.detailsProdact.value.orders!.time!)}',
+                              fontSize: Dimensions.FONT_SIZE_LARGE,
+                              color:
+                                  Theme.of(context).textTheme.bodyText1!.color),
+                        ]),
+                        SizedBox(width: 4.w)
+                      ]),
                       SizedBox(height: 8.h),
                       Container(
                         padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
@@ -250,27 +243,28 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                                               .textTheme
                                               .bodyText1!
                                               .color),
+                                      orderController.detailsProdact.value
+                                                  .orders!.address !=
+                                              null
+                                          ? Container()
+                                          : CustomText(
+                                              text: orderController
+                                                      .detailsProdact
+                                                      .value
+                                                      .orders!
+                                                      .address!
+                                                      .street ??
+                                                  "",
+                                              fontSize: 14.sp,
+                                              color: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyText1!
+                                                  .color),
                                       CustomText(
                                           text: orderController.detailsProdact
                                                       .value.orders!.address !=
                                                   null
-                                              ? orderController
-                                                  .detailsProdact
-                                                  .value
-                                                  .orders!
-                                                  .address!
-                                                  .street!
-                                              : 'العنوان غير موجود',
-                                          fontSize: 14.sp,
-                                          color: Theme.of(context)
-                                              .textTheme
-                                              .bodyText1!
-                                              .color),
-                                      CustomText(
-                                          text: orderController.detailsProdact
-                                                      .value.orders!.address !=
-                                                  null
-                                              ? " عمارة رقم : " +
+                                              ? "البناية  : " +
                                                   orderController
                                                       .detailsProdact
                                                       .value
@@ -278,7 +272,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                                                       .address!
                                                       .building! +
                                                   "\t " +
-                                                  " شقة رقم : " +
+                                                  "شقة  : " +
                                                   orderController
                                                       .detailsProdact
                                                       .value
@@ -441,7 +435,6 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                             );
                           },
                         ),
-
                       SizedBox(height: 8.h),
                       CustomDivider(),
                       SizedBox(height: 8.h),
@@ -484,7 +477,6 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                               fontSize: Dimensions.FONT_SIZE_LARGE,
                             ),
                           ]),
-
                       Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -496,7 +488,6 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                                     '${orderController.detailsProdact.value.orders!.deliveryCost.toString()} جنيه',
                                 fontSize: Dimensions.FONT_SIZE_LARGE),
                           ]),
-
                       Padding(
                         padding: EdgeInsets.symmetric(
                             vertical: Dimensions.PADDING_SIZE_SMALL),
@@ -595,7 +586,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                               ///Put label over here
                               label: Text(
                                 'قم بالسحب لإنهاء عميلة التوصيل',
-                                style: GoogleFonts.cairo(
+                                style: rubikBold.copyWith(
                                     fontSize: 18, color: AppColors.gray),
                               ),
                               dismissThresholds: 0.5,

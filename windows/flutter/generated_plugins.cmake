@@ -3,7 +3,8 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
-  connectivity_plus_windows
+  awesome_notifications
+  firebase_core
   geolocator_windows
   url_launcher_windows
 )

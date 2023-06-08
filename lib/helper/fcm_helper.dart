@@ -49,12 +49,12 @@ class FcmHelper {
 
   /// when user click on notification or click on button on the notification
   static listenToActionButtons() {
-    awesomeNotifications.actionStream.listen(
-      (ReceivedNotification receivedNotification) async {
-        // for ex:
-        //Get.toNamed(Routes.NOTIFICATIONS)
-      },
-    );
+    // awesomeNotifications.actionStream.listen(
+    //   (ReceivedNotification receivedNotification) async {
+    //     // for ex:
+    //     //Get.toNamed(Routes.NOTIFICATIONS)
+    //   },
+    // );
   }
 
   ///handle fcm notification settings (sound,badge..etc)
@@ -146,8 +146,8 @@ class FcmHelper {
                 true, // Hide/show the time elapsed since notification was displayed
             payload:
                 payload, // data of the notification (it will be used when user clicks on notification)
-            notificationLayout:
-                notificationLayout, // notification shape (message,media player..etc) For ex => NotificationLayout.Messaging
+            notificationLayout: NotificationLayout
+                .Default, // notification shape (message,media player..etc) For ex => NotificationLayout.Messaging
             autoDismissible:
                 true, // dismiss notification when user clicks on it
             summary:
@@ -218,17 +218,16 @@ class FcmHelper {
               channelShowBadge: true,
               playSound: true,
               importance: NotificationImportance.Max)
-        ],
-        channelGroups: [
-          NotificationChannelGroup(
-            channelGroupkey: NotificationChannels.generalChannelGroupKey,
-            channelGroupName: NotificationChannels.generalChannelGroupName,
-          ),
-          NotificationChannelGroup(
-            channelGroupkey: NotificationChannels.chatChannelGroupKey,
-            channelGroupName: NotificationChannels.chatChannelGroupName,
-          )
-        ]);
+        ], channelGroups: [
+      NotificationChannelGroup(
+        channelGroupName: NotificationChannels.generalChannelGroupName,
+        channelGroupKey: '',
+      ),
+      NotificationChannelGroup(
+        channelGroupName: NotificationChannels.chatChannelGroupName,
+        channelGroupKey: '',
+      )
+    ]);
   }
 }
 

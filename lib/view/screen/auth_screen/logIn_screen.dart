@@ -1,12 +1,8 @@
 import 'package:delivery_boy/server/server_auth.dart';
-import 'package:delivery_boy/services/connectvity_service.dart';
 import 'package:delivery_boy/values/export.dart';
 import 'package:delivery_boy/view/custom_widget/customTextField.dart';
 import 'package:delivery_boy/view/custom_widget/custom_button.dart';
 import 'package:delivery_boy/view/custom_widget/custom_dialoug.dart';
-import 'package:get/get.dart';
-
-import 'forget_password_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -28,14 +24,14 @@ class LoginScreen extends StatelessWidget {
   saveForm() async {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
-      if (ConnectivityService.connectivityStatus !=
-          ConnectivityStatus.Offline) {
-        await ServerAuth.instance
-            .login(mobile: number.text, password: password.text);
-      } else {
-        CustomDialougs.utils
-            .showDialoug(messageKey: 'network_error', titleKey: 'alert');
-      }
+      // if (ConnectivityService.connectivityStatus !=
+      //     ConnectivityStatus.Offline) {
+      await ServerAuth.instance
+          .login(mobile: number.text, password: password.text);
+      // } else {
+      //   CustomDialougs.utils
+      //       .showDialoug(messageKey: 'network_error', titleKey: 'alert');
+      // }
     }
   }
 

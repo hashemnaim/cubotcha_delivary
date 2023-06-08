@@ -1,6 +1,6 @@
 import 'package:delivery_boy/values/export.dart';
-import 'package:google_fonts/google_fonts.dart';
 
+import '../../../values/styles.dart';
 import '../../custom_widget/AppCustomer.dart';
 import '../../custom_widget/background.dart';
 import '../../custom_widget/custom_button.dart';
@@ -55,7 +55,7 @@ class _ProdactScreenState extends State<ForgetScreen>
                                     filled: true,
                                     fillColor: Colors.white,
                                     hintText: "ادخل البريد الكتروني ",
-                                    hintStyle: GoogleFonts.cairo(
+                                    hintStyle: rubikBold.copyWith(
                                       fontWeight: FontWeight.w500,
                                       fontSize: 14,
                                       color: Colors.grey,

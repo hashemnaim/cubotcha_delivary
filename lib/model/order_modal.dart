@@ -235,8 +235,8 @@ class ShippingAddress {
   String? createdAt;
   String? updatedAt;
   String? userId;
-  String? cityId;
-  String? areaId;
+  String? city;
+  String? area;
   String? apartment;
   String? building;
   String? isDefault;
@@ -252,8 +252,8 @@ class ShippingAddress {
       this.createdAt,
       this.updatedAt,
       this.userId,
-      this.cityId,
-      this.areaId,
+      this.city,
+      this.area,
       this.isDefault});
 
   ShippingAddress.fromJson(Map<String, dynamic> json) {
@@ -265,8 +265,8 @@ class ShippingAddress {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     userId = json['user_id'];
-    cityId = json['city_id'];
-    areaId = json['area_id'];
+    city = json['city'];
+    area = json['area'];
     apartment = json['apartment'];
     building = json['building'];
     isDefault = json['is_default'];
@@ -282,8 +282,7 @@ class ShippingAddress {
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
     data['user_id'] = this.userId;
-    data['city_id'] = this.cityId;
-    data['area_id'] = this.areaId;
+
     data['is_default'] = this.isDefault;
     return data;
   }

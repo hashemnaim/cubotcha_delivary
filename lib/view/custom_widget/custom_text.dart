@@ -1,6 +1,6 @@
 import 'package:delivery_boy/values/export.dart';
 
-import 'package:google_fonts/google_fonts.dart';
+import '../../values/styles.dart';
 
 class CustomText extends StatelessWidget {
   final String? text;
@@ -28,7 +28,7 @@ class CustomText extends StatelessWidget {
       textAlign: textAlign ?? TextAlign.start,
       maxLines: maxLines,
       overflow: maxLines != null ? TextOverflow.ellipsis : null,
-      style: GoogleFonts.cairo(
+      style: rubikBold.copyWith(
         fontWeight: fontWeight ?? FontWeight.w500,
         fontSize: fontSize ?? 14.sp,
         letterSpacing: letterSpacing ?? -0.16,

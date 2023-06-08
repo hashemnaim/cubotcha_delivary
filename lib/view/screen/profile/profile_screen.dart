@@ -26,14 +26,6 @@ class ProfileScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   SizedBox(height: 20.h),
-                  // Text(
-                  //   'My Profile',
-                  //   style: Theme.of(context).textTheme.headline2.copyWith(
-                  //       fontSize: 30,
-                  //       color: Colors.black,
-                  //       fontWeight: FontWeight.bold),
-                  // ),
-                  // SizedBox(height: 20),
                 ],
               ),
             ),
@@ -49,10 +41,10 @@ class ProfileScreen extends StatelessWidget {
                       context: context,
                       text: SHelper.sHelper.getValue("mobile")),
                   SizedBox(height: 15),
-                  _userInfoWidget(
-                      context: context,
-                      text: SHelper.sHelper.getValue("address")),
-                  SizedBox(height: 20),
+                  // _userInfoWidget(
+                  //     context: context,
+                  //     text: SHelper.sHelper.getValue("address")),
+                  // SizedBox(height: 20),
                   InkWell(
                     onTap: () async {
                       await SHelper.sHelper.clearSp();
